@@ -43,7 +43,7 @@ This repository contains the code, data, and results for our final project in CS
 ```python
 # Load and split mazes
 maze_files = [os.path.join(input_dir, f) for f in sorted(os.listdir(input_dir)) if f.endswith(".txt")]
-train_mazes, val_mazes, test_mazes = split_mazes_three_way(maze_files)
+train_mazes, val_mazes, test_mazes = split_mazes(maze_files)
 
 # Tune Q-learning
 tuned_results = tune_qlearning_hyperparams(train_mazes, score_weights=(1.0, 1.0, 0.2))
