@@ -1,6 +1,10 @@
-# CS221 Final Project — Learning Heuristics for A* in Imperfect Mazes
+# CS221 Final Project Spring 2025 — Learning Heuristics for A* in Imperfect Mazes
 
 This repository contains the code, data, and results for our final project in CS 221. We explored using **tabular Q-learning** to learn heuristics that improve A* search efficiency in imperfect mazes.
+
+## Author Names: 
+Brooke Ballhaus 
+Riya Narain
 
 ---
 
