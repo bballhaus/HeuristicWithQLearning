@@ -46,7 +46,7 @@ maze_files = [os.path.join(input_dir, f) for f in sorted(os.listdir(input_dir)) 
 train_mazes, test_mazes = split_mazes(maze_files)
 
 # Tune Q-learning
-results_df = run_hyperparameter_search(maze_files, n_maps=30, n_trials_per_map=30)
+results_df = run_hyperparameter_search(train_mazes, n_maps=30, n_trials_per_map=30)
 
 # Train and evaluate
 Q = train_q_learning_reversed(
