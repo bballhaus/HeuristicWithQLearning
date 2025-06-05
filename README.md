@@ -14,17 +14,17 @@ This repository contains the code, data, and results for our final project in CS
 |----------------------------|-------------|
 | `CS221_Final_Project.ipynb` | Main Colab notebook with all code: data loading, training, evaluation, and visualization |
 | `imperfect_maze.zip`       | Dataset of 1500 imperfect mazes (varying sizes, with loops) |
-| `tuning_results.csv`       | Output of grid search for Q-learning hyperparameters |
-| `final_evaluation.csv`     | Evaluation results on test mazes for all heuristics |
+| `hyperparameter_results.csv`       | Output of Surrogate-based Regression Tuning for Q-learning hyperparameters |
+| `final_heuristic_comparison.csv`     | Evaluation results on test mazes for all heuristics |
 | `README.md`                | Overview of the project and how to reproduce it |
 
 ---
 
 ## Heuristics Compared
 
-- `manhattan`: Standard Manhattan distance
-- `euclidean`: Standard Euclidean distance
-- `qlearned`: Heuristic learned using Q-learning value estimates (converted to cost-to-go)
+- `manhattan_heuristic`: Standard Manhattan distance
+- `euclidean_heuristic`: Standard Euclidean distance
+- `q_heuristic`: Heuristic learned using Q-learning value estimates (converted to cost-to-go)
 
 ---
 
@@ -46,7 +46,7 @@ maze_files = [os.path.join(input_dir, f) for f in sorted(os.listdir(input_dir)) 
 train_mazes, test_mazes = split_mazes(maze_files)
 
 # Tune Q-learning
-results_df = run_hyperparameter_search(train_mazes, n_maps=30, n_trials_per_map=30)
+results_df = run_hyperparameter_search(train_mazes, n_maps=300, n_trials_per_map=30)
 
 # Train and evaluate
 Q = train_q_learning_reversed(
@@ -57,4 +57,8 @@ Q = train_q_learning_reversed(
     num_sample_starts=best_config["num_sample_starts"],
     step_multiplier=best_config["step_multiplier"]
 )
-heuristics = [("manhattan", manhattan), ("euclidean", euclidean), ("qlearned", learned_heuristic(Q, actions))]
+heuristics = {
+        "Manhattan": manhattan_heuristic,
+        "Euclidean": euclidean_heuristic,
+        "Q-learned": q_heuristic
+    }
