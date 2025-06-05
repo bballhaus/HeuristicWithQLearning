@@ -1,6 +1,6 @@
 # CS221 Final Project (Spring 2025) — Learning Heuristics for A* in Imperfect Mazes
 
-This repository contains the code, data, and results for our final project in CS 221. We explored using **tabular Q-learning** to learn heuristics that improve A* search efficiency in imperfect mazes.
+This repository contains the code, data, and results for our final project in CS 221: Artificial Intelligence: Principles and Techniques. We explored how **tabular Q-learning** can be used to learn heuristics that improve the efficiency of A* search in imperfect mazes, which contain loops and misleading paths.
 
 ## Author Names: 
 - Brooke Ballhaus  
@@ -22,7 +22,7 @@ This repository contains the code, data, and results for our final project in CS
 
 - `manhattan_heuristic`: Standard Manhattan distance
 - `euclidean_heuristic`: Standard Euclidean distance
-- `q_heuristic`: Heuristic learned using Q-learning value estimates (converted to cost-to-go)
+- `q_heuristic`: Heuristic derived from Q-learning (negative of max Q-value per state to approximate cost-to-go)
 
 ---
 
