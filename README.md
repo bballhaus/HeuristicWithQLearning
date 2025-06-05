@@ -14,8 +14,6 @@ This repository contains the code, data, and results for our final project in CS
 |----------------------------|-------------|
 | `CS221_Final_Project.ipynb` | Main Colab notebook with all code: data loading, training, evaluation, and visualization |
 | `imperfect_maze.zip`       | Dataset of 1500 imperfect mazes (varying sizes, with loops) |
-| `hyperparameter_results.csv`       | Output of Surrogate-based Regression Tuning for Q-learning hyperparameters |
-| `final_heuristic_comparison.csv`     | Evaluation results on test mazes for all heuristics |
 | `README.md`                | Overview of the project and how to reproduce it |
 
 ---
