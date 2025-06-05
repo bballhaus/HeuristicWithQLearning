@@ -43,11 +43,18 @@ This repository contains the code, data, and results for our final project in CS
 ```python
 # Load and split mazes
 maze_files = [os.path.join(input_dir, f) for f in sorted(os.listdir(input_dir)) if f.endswith(".txt")]
-train_mazes, val_mazes, test_mazes = split_mazes(maze_files)
+train_mazes, test_mazes = split_mazes(maze_files)
 
 # Tune Q-learning
-tuned_results = tune_qlearning_hyperparams(train_mazes, score_weights=(1.0, 1.0, 0.2))
+results_df = run_hyperparameter_search(maze_files, n_maps=30, n_trials_per_map=30)
 
 # Train and evaluate
-Q = train_q_learning(maze, goal, goal, actions, ...)
+Q = train_q_learning_reversed(
+    maze, goal, actions,
+    discount=best_config["discount"],
+    explorationProb=best_config["explorationProb"],
+    step_size=best_config["step_size"],
+    num_sample_starts=best_config["num_sample_starts"],
+    step_multiplier=best_config["step_multiplier"]
+)
 heuristics = [("manhattan", manhattan), ("euclidean", euclidean), ("qlearned", learned_heuristic(Q, actions))]
