@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using the metadata below."
+title: "Learning Heuristics for A* in Imperfect Mazes with Q-Learning"
+abstract: "We use tabular Q-learning to learn a cost-to-go heuristic for A* search and compare it against Manhattan and Euclidean heuristics on a dataset of 1500 imperfect mazes with loops."
+authors:
+  - family-names: Ballhaus
+    given-names: Brooke
+  - family-names: Narain
+    given-names: Riya
+date-released: 2025-06-05
+repository-code: "https://github.com/bballhaus/HeuristicWithQLearning"
+license: MIT
+type: software
