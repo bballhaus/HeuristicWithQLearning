@@ -4,8 +4,7 @@ numpy
 pandas
 matplotlib
 joblib
-# Used in the analysis cells (RandomForestRegressor, sns.heatmap) but NOT
-# imported anywhere in the notebook; add the imports before running those cells.
+# Used in the analysis cells (RandomForestRegressor, sns.heatmap).
 scikit-learn
 seaborn
 # google.colab (files.upload / files.download) is Colab-only and is not on PyPI.

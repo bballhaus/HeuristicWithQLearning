@@ -12,6 +12,8 @@ All code lives in a single Google Colab notebook.
 - `imperfect_maze.zip` - dataset: `imperfect_maze/mazeN_dimD.txt` (1500 mazes; also contains `__MACOSX/` entries).
 - `requirements.txt` - third-party packages (all preinstalled on Colab).
 - `README.md` - project overview and reproduction steps.
+- `tests/test_notebook.py` - pytest smoke tests (no notebook execution; see Tests).
+- `.github/workflows/tests.yml` - CI: runs `python -m pytest -q` on Python 3.11 for pushes/PRs to `main`.
 
 ## Setup
 - Colab (intended): open the notebook, run cell 1, and upload `imperfect_maze.zip` when prompted.
@@ -19,17 +21,24 @@ All code lives in a single Google Colab notebook.
 - Local Jupyter: `pip install -r requirements.txt` plus `jupyter`. Then:
   - `unzip imperfect_maze.zip -d imperfect_maze` from the notebook's working directory, so files land in `imperfect_maze/imperfect_maze/*.txt`.
   - Replace `from google.colab import files`, `files.upload()` (cells 1 and 22) and `files.download(...)` (cells 15 and 21) with local paths.
-- Cells 19 onward use `RandomForestRegressor` and `sns` without importing them. Add
-  `from sklearn.ensemble import RandomForestRegressor` and `import seaborn as sns` if running those cells.
 
 ## How to run
 Run cells top to bottom. Cell indices below are 0-based code-cell positions in the notebook JSON.
-1. Cell 0: imports. Cell 1: upload/unzip dataset, list maze files.
+1. Cell 0: imports (including scikit-learn, seaborn, and `IPython.display.display`). Cell 1: upload/unzip dataset, list maze files.
 2. Cell 2: `split_mazes(maze_files, train_frac=0.2, seed=42)` -> `train_mazes`, `test_mazes`.
 3. Cell 11: `run_hyperparameter_search(train_mazes, n_maps=30, n_trials_per_map=30)` -> `hyperparameter_results.csv/json`
    (slow; the README example shows `n_maps=300`).
 4. Cell 12: evaluates each heuristic on `test_mazes` with a hardcoded `best_config` -> `final_heuristic_comparison.csv/json`.
 5. Cells 13-23: visualizations, parameter-importance heatmap, per-dimension summaries, downloads.
+
+## Tests
+- `pip install pytest && python -m pytest -q` (runs in well under a second; no numpy/pandas needed).
+- The tests never execute the notebook. They check it is valid JSON, that every code cell compiles
+  (with `google.colab` imports, `files.upload()`/`files.download()` calls and `!`/`%` lines neutralized),
+  that every name read anywhere is a builtin, imported, or defined in some cell, and that
+  `imperfect_maze.zip` contains files under `imperfect_maze/`.
+- When adding cells that use a new library, add its import to cell 0 (and the package to
+  `requirements.txt`), or the undefined-name test fails.
 
 ## Key functions (cell)
 - `split_mazes` (2), `load_maze` (3) - maze I/O; a maze is a numpy grid where 0 = free cell.
